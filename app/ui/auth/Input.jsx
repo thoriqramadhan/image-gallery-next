@@ -16,12 +16,13 @@ export function Input({ name, type = "text", placeholder }) {
         name={forName}
         id={forName}
         placeholder={placeholder ?? ""}
+        required
         className="block border px-3 py-2 rounded-md w-full font-medium tracking-wider"
       />
     </div>
   );
 }
-Input.propTypes = {
-  name: PropTypes.string.isRequired,
-  type: PropTypes.string,
-};
+// Input.propTypes = {
+//   name: PropTypes.string.isRequired,
+//   type: PropTypes.string,
+// };
