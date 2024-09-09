@@ -27,18 +27,18 @@ export function ImgCard({ imgData }) {
     <div className="flex flex-col text-center gap-y-1 group">
       <div className="relative w-full h-0 pb-[100%] bg-white overflow-hidden border shrink-0 shadow-md mb-2 cursor-pointer">
         <div
-          className="w-full h-full bg-black/60 absolute z-30 hidden group-hover:flex p-2 sm:flex-col"
+          className="w-full h-full bg-black/60 absolute z-30 hidden group-hover:flex p-2 sm:flex-col select-none"
           onClick={handler}
         >
           <div className="w-full flex justify-end">
             <CiStar
-              className={clsx("text-[#FFF629] text-3xl", {
-                "text-red-500": isFavourite,
+              className={clsx("text-3xl", {
+                "text-red-500": !isFavourite,
+                "text-[#FFF629]": isFavourite,
               })}
-              fill="#FFF629"
             />
           </div>
-          <div className="flex-1 self-end text-white overflow-y-scroll text-sm text-left mt-10 thin-scrollbar">
+          <div className="flex-1 self-end text-white overflow-y-scroll text-sm text-left mt-10 thin-scrollbar select-none">
             Lorem ipsum dolor, sit amet consectetur adipisicing elit. Dolores
             molestias quas asperiores voluptatum esse voluptatibus accusamus
             veniam libero alias id! Lorem ipsum dolor sit amet, consectetur
