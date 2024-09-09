@@ -1,7 +1,7 @@
 import React from "react";
 import { createUser } from "../lib/action";
-import { Input } from "@/app/ui/auth/Input";
-import AuthForm from "../ui/auth/AuthForm";
+import { Input } from "@/components/auth/Input";
+import AuthForm from "../../components/auth/AuthForm";
 
 export default async function Page() {
   const obj = { username: "test", email: "test@gmail.com", password: 1345678 };

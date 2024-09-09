@@ -1,4 +1,4 @@
-import Sidenav from "@/app/ui/Sidenav";
+import Sidenav from "@/components/Sidenav";
 
 export default function BaseLayout({ children }) {
   return (

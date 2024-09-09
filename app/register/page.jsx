@@ -1,6 +1,6 @@
 import React from "react";
-import { Input } from "@/app/ui/auth/Input";
-import AuthForm from "../ui/auth/AuthForm";
+import { Input } from "@/components/auth/Input";
+import AuthForm from "../../components/auth/AuthForm";
 
 export default function Page() {
   const navigator = { endpoint: "Login", text: "Already have an account?" };

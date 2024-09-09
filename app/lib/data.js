@@ -23,3 +23,14 @@ export async function getUser() {
         throw new Error('Failed to fetch user')
     }
 }
+
+export async function getImg() {
+    const version = 'v1';
+    const authToken = process.env.AUTH_TOKEN 
+    const url = 'https://api.unsplash.com/photos?page=1&per_page=5';
+    try {
+        const response = fetch(ur)
+    } catch (error) {
+        
+    }
+}
