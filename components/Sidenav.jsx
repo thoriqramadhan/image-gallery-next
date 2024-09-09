@@ -27,9 +27,9 @@ export default function Sidenav() {
     },
   ];
   return (
-    <div className="w-full flex justify-center pb-10 fixed bottom-0 md:w-[80px] md:static ">
+    <div className="w-full z-50 flex justify-center pb-5 fixed bottom-0 md:w-[80px] md:static md:h-full md:pb-0">
       <div
-        className="w-[85%] h-20 bg-white border rounded-[35px] flex justify-evenly items-center mb-5
+        className="w-[85%] h-20 bg-white border shadow-md rounded-[35px] flex justify-evenly items-center
        md:rounded-none md:h-full md:flex-col md:items-center md:justify-start md:gap-y-10 md:pt-10 md:w-full"
       >
         {iconObj.map((icon) => (

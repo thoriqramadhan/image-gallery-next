@@ -38,7 +38,7 @@ export function ImgCard({ imgData }) {
               fill="#FFF629"
             />
           </div>
-          <div className="flex-1 text-white overflow-y-scroll text-sm text-left mt-10 thin-scrollbar">
+          <div className="flex-1 self-end text-white overflow-y-scroll text-sm text-left mt-10 thin-scrollbar">
             Lorem ipsum dolor, sit amet consectetur adipisicing elit. Dolores
             molestias quas asperiores voluptatum esse voluptatibus accusamus
             veniam libero alias id! Lorem ipsum dolor sit amet, consectetur

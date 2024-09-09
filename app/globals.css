@@ -25,3 +25,23 @@ body {
     text-wrap: balance;
   }
 }
+
+/* Tambahkan di file globals.css */
+.thin-scrollbar {
+  scrollbar-width: thin; /* Untuk Firefox */
+  scrollbar-color: rgba(107, 114, 128, 0.5) transparent; /* Warna dan background scrollbar di Firefox */
+}
+
+.thin-scrollbar::-webkit-scrollbar {
+  width: 8px; /* Lebar scrollbar untuk WebKit (Chrome, Safari) */
+  height: 8px; /* Tinggi scrollbar horizontal (jika ada) */
+}
+
+.thin-scrollbar::-webkit-scrollbar-thumb {
+  background-color: rgba(107, 114, 128, 0.5); /* Warna scrollbar thumb */
+  border-radius: 10px; /* Membuat sudut scrollbar lebih halus */
+}
+
+.thin-scrollbar::-webkit-scrollbar-track {
+  background: transparent; /* Background track scrollbar */
+}
