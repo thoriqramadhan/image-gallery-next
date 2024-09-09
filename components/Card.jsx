@@ -1,15 +1,24 @@
 "use client";
-import { formatDate } from "@/app/lib/utils";
+import { FormatDate } from "@/app/lib/utils";
 import Image from "next/image";
 import React, { useState } from "react";
 import { CiStar } from "react-icons/ci";
 
 import clsx from "clsx";
 
+export function ImgCardWrapper({ imgDatas }) {
+  return (
+    <>
+      {imgDatas.map((data, i) => (
+        <ImgCard imgData={data} key={i} />
+      ))}
+    </>
+  );
+}
 export function ImgCard({ imgData }) {
   const [isFavourite, setIsFavourite] = useState(false);
   const { created_at, alt_description, urls, user } = imgData;
-  const date = formatDate(created_at);
+  const date = FormatDate(created_at);
   function handler() {
     setIsFavourite(!isFavourite);
     console.log(isFavourite);
