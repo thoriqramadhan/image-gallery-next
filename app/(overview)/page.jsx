@@ -1,5 +1,6 @@
 import { ImgCardWrapper } from "@/components/Card";
 import { getFakeData } from "../lib/data";
+import { ImgCardSkeleton } from "@/components/skeleton/skeletons";
 
 export default async function Home() {
   const imgDatas = await getFakeData();
@@ -11,6 +12,7 @@ export default async function Home() {
         </h1>
         <div className="border px-7 py-14 grid grid-cols-3 gap-2 md:grid-cols-4 lg:grid-cols-6 lg:gap-3">
           <ImgCardWrapper imgDatas={imgDatas} />
+          <ImgCardSkeleton />
         </div>
       </div>
     </div>
