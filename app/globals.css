@@ -24,6 +24,9 @@ body {
   .text-balance {
     text-wrap: balance;
   }
+  .transition-300 {
+    @apply transition-all duration-300
+  }
 }
 
 /* Tambahkan di file globals.css */

@@ -1,4 +1,5 @@
 import { hashPassword } from "./auth";
+import { relatedImg } from "./static_data";
 import { query } from "./db"; 
 
 const data = {
@@ -14,7 +15,6 @@ const data = {
 }
 export async function addUser({ username, email, password }) {
     let hashedpassword = await hashPassword(password);
-    console.log(hashedpassword)
     
     try {
         await query(`INSERT INTO "user" (username , email , password) VALUES ($1 , $2 , $3);`, 
@@ -79,14 +79,21 @@ export async function getImgDetail(id) {
 }
 export async function getFakeData(limit , mode) {
     if (mode == 'object') {
-        console.log('in')
         return data;
     } else {
-        console.log('out')
         const fakeData = [];
         for (let index = 0; index < limit; index++) {
             fakeData.push(data)
         }
         return fakeData
     }
+}
+export async function getRelatedImg(relatedImg) {
+    // console.log(relatedImg.related_collections.results)
+    const relatedData = relatedImg.related_collections.results
+    const datas = relatedData.flatMap((item) => item.preview_photos)
+    // const data = relatedData.map(data => data.preview_photos.map(item => item))
+    // console.log(relatedData[0].preview_photos)
+    console.log(typeof datas)
+    return datas;
 }

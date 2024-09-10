@@ -3,6 +3,7 @@ import Link from "next/link";
 import { usePathname } from "next/navigation";
 import React from "react";
 import { FaHome, FaUser, FaTag } from "react-icons/fa";
+import { twMerge } from "tailwind-merge";
 import clsx from "clsx";
 
 export default function Sidenav() {
@@ -23,36 +24,41 @@ export default function Sidenav() {
     {
       href: "/profile",
       icon: React.cloneElement(<FaUser />),
+      another: ({ ...props }) => <FaUser {...props} />,
       size: 26,
     },
   ];
   return (
-    <div className="w-full z-50 flex justify-center pb-5 fixed bottom-0 md:w-[80px] md:static md:h-full md:pb-0">
+    <div className="w-full z-50 flex justify-center pb-5 fixed bottom-0 group md:w-[80px] md:static md:h-full md:pb-0 md:shrink-0">
       <div
-        className="w-[85%] h-20 bg-white border shadow-md rounded-[35px] flex justify-evenly items-center
+        className="w-[85%] h-20 bg-white border shadow-md rounded-[35px] flex justify-evenly items-center transition-300 translate-y-[100px] group-hover:translate-y-0 md:translate-y-0 
        md:rounded-none md:h-full md:flex-col md:items-center md:justify-start md:gap-y-10 md:pt-10 md:w-full"
       >
-        {iconObj.map((icon) => (
+        {iconObj.map((icon, index) => (
           <Link href={icon.href} className="block md:w-full" key={icon.href}>
-            <div className="relative md:flex md:w-full md:justify-center md:relative md:py-1">
+            <div
+              className={twMerge(
+                clsx(
+                  "md:flex md:w-full md:justify-center md:relative p-2 rounded-full md:py-1 md:border-r-2 md:border-transparent md:rounded-none",
+                  {
+                    "bg-sky-500 md:bg-transparent md:border-sky-500":
+                      path === icon.href ||
+                      (path !== "/tag" && path !== "/profile" && index === 0),
+                  }
+                )
+              )}
+            >
               {React.cloneElement(icon.icon, {
                 style: {
                   width: `${icon.size}px`,
                   height: `${icon.size}px`,
                 },
                 className: clsx("z-30 relative md:text-black", {
-                  "text-white": path === icon.href,
+                  "text-white":
+                    path === icon.href ||
+                    (path !== "/tag" && path !== "/profile" && index === 0),
                 }),
               })}
-              <span
-                className={clsx(
-                  "w-[45px] h-[45px] rounded-full -left-[7px] -top-[6px] md:w-1 md:h-full bg-sky-500 absolute md:right-0 md:left-auto md:top-auto",
-                  {
-                    block: path == icon.href,
-                    "hidden ": path != icon.href,
-                  }
-                )}
-              ></span>
             </div>
           </Link>
         ))}
