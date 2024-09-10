@@ -56,10 +56,37 @@ export async function getImg(page , limit) {
         console.log(error)
     }
 }
-export async function getFakeData() {
-    const fakeData = [];
-    for (let index = 0; index < 10; index++) {
-        fakeData.push(data)
+export async function getImgDetail(id) {
+    const version = 'v1';
+    const authToken = process.env.AUTH_TOKEN 
+    const url = `https://api.unsplash.com/photos/${id}`;
+    try {
+        const response = await fetch(url, {
+            method: 'GET',
+            headers: {
+                'Accept-Version': version,
+                'Authorization': authToken
+            }
+        })
+        if (!response.ok) {
+            throw new Error('Failed to fetch : ' , response.status)
+        }
+        const data = await response.json()
+        return data;
+    } catch (error) {
+        console.log(error)
     }
-    return fakeData
+}
+export async function getFakeData(limit , mode) {
+    if (mode == 'object') {
+        console.log('in')
+        return data;
+    } else {
+        console.log('out')
+        const fakeData = [];
+        for (let index = 0; index < limit; index++) {
+            fakeData.push(data)
+        }
+        return fakeData
+    }
 }
