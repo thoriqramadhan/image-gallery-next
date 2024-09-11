@@ -12,7 +12,6 @@ export function BentoCardWrapper({ arr }) {
   );
 }
 export async function BentoCardItem({ url, id }) {
-  const base64img = await getBase64(url);
   return (
     <Link className="w-full h-auto relative group" href={`/${id}/detail`}>
       <Image

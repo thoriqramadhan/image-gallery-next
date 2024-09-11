@@ -7,16 +7,6 @@ import { BentoCardWrapper } from "@/components/server/Card";
 import { allBlurredDataUrls } from "../lib/utils";
 
 export default async function Home() {
-  const randomElements = (limit) => {
-    const numbers = [];
-    for (let index = 0; index < limit; index++) {
-      numbers.push(<li>{index}</li>);
-    }
-    return numbers;
-  };
-  // const element1 = randomElements(5);
-  // const element2 = randomElements(5);
-  // const element3 = randomElements(5);
   const fakeData1 = await allBlurredDataUrls(await getFakeData(5));
   const fakeData2 = await allBlurredDataUrls(await getFakeData(5));
   const fakeData3 = await allBlurredDataUrls(await getFakeData(5));
