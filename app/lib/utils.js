@@ -26,7 +26,8 @@ export async function getBase64(imageUrl) {
                 const { base64 } = await getPlaiceholder(buffer)
                 return base64;
         } catch (error) {
-                if(error instanceof Error) console.log(error.stack)
+                // if(error instanceof Error) console.log(error.stack)
+                console.log(error.stack)
         }
 }
 

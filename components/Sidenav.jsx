@@ -9,7 +9,6 @@ import clsx from "clsx";
 export default function Sidenav() {
   const path = usePathname();
   const iconSize = 30;
-  console.log(path == "/");
   const iconObj = [
     {
       href: "/",

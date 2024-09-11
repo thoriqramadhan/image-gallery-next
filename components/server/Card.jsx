@@ -1,13 +1,31 @@
 import Image from "next/image";
-import { getBase64, RandomNumber } from "@/app/lib/utils";
+import { allBlurredDataUrls, getBase64, RandomNumber } from "@/app/lib/utils";
 import Link from "next/link";
+import { getFakeData } from "@/app/lib/data";
 
-export function BentoCardWrapper({ arr }) {
+export async function BentoCardWrapper() {
+  const fakeData1 = await allBlurredDataUrls(await getFakeData(5));
+  const fakeData2 = await allBlurredDataUrls(await getFakeData(5));
+  const fakeData3 = await allBlurredDataUrls(await getFakeData(5));
   return (
     <>
-      {arr.map((item) => (
-        <BentoCardItem url={item.urls} id={item.id} key={item.id} />
-      ))}
+      <div className="w-full h-screen grid gap-2 grid-cols-1 md:grid-cols-2 lg:grid-cols-3">
+        <div className="flex-1 flex flex-col gap-y-3">
+          {fakeData1.map((item) => (
+            <BentoCardItem url={item.urls} id={item.id} key={item.id} />
+          ))}
+        </div>
+        <div className="flex-1 flex flex-col gap-y-3">
+          {fakeData2.map((item) => (
+            <BentoCardItem url={item.urls} id={item.id} key={item.id} />
+          ))}
+        </div>
+        <div className="flex-1 flex flex-col gap-y-3">
+          {fakeData3.map((item) => (
+            <BentoCardItem url={item.urls} id={item.id} key={item.id} />
+          ))}
+        </div>
+      </div>
     </>
   );
 }
