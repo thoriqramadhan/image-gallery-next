@@ -2738,3 +2738,23 @@ export const tags = [
     title: "credit card",
   },
 ];
+export const data = {
+  id: '20A4KOtqmEI',
+  created_at: '2024-07-18T19:49:40Z',
+  urls: {
+      regular: 'https://images.unsplash.com/photo-1721332149069-a470150ef51c?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w2NTAzMDl8MXwxfGFsbHwxfHx8fHx8Mnx8MTcyNTg1NDQ2Mnw&ixlib=rb-4.0.3&q=80&w=1080'
+  },
+  user: {
+      name: 'Samsung Memory'
+  },
+  alt_description: 'A woman standing in front of a flat screen TV'
+}
+
+export const randUrl = [
+  "https://images.unsplash.com/photo-1721332149069-a470150ef51c?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w2NTAzMDl8MXwxfGFsbHwxfHx8fHx8Mnx8MTcyNTg1NDQ2Mnw&ixlib=rb-4.0.3&q=80&w=1080",
+  "https://plus.unsplash.com/premium_photo-1714229504964-e7096406b5da?ixlib=rb-4.0.3&q=80&fm=jpg&crop=entropy&cs=tinysrgb&w=1080&fit=max",
+  "https://images.unsplash.com/photo-1596510915005-2cd3c22b37df?ixlib=rb-4.0.3&q=80&fm=jpg&crop=entropy&cs=tinysrgb&w=1080&fit=max",
+  "https://images.unsplash.com/photo-1522621032211-ac0031dfbddc?ixlib=rb-4.0.3&q=80&fm=jpg&crop=entropy&cs=tinysrgb&w=1080&fit=max",
+  "https://images.unsplash.com/photo-1721332155484-5aa73a54c6d2?ixlib=rb-4.0.3&q=80&fm=jpg&crop=entropy&cs=tinysrgb&w=1080&fit=max",
+  "https://images.unsplash.com/photo-1721332155484-5aa73a54c6d2?ixlib=rb-4.0.3&q=80&fm=jpg&crop=entropy&cs=tinysrgb&w=1080&fit=max",
+];

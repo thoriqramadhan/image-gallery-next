@@ -1,18 +1,8 @@
 import { hashPassword } from "./auth";
-import { relatedImg } from "./static_data";
+import { relatedImg , data , randUrl } from "./static_data";
 import { query } from "./db"; 
+import { RandomNumber } from "./utils";
 
-const data = {
-    id: '20A4KOtqmEI',
-    created_at: '2024-07-18T19:49:40Z',
-    urls: {
-        regular: 'https://images.unsplash.com/photo-1721332149069-a470150ef51c?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w2NTAzMDl8MXwxfGFsbHwxfHx8fHx8Mnx8MTcyNTg1NDQ2Mnw&ixlib=rb-4.0.3&q=80&w=1080'
-    },
-    user: {
-        name: 'Samsung Memory'
-    },
-    alt_description: 'A woman standing in front of a flat screen TV'
-}
 export async function addUser({ username, email, password }) {
     let hashedpassword = await hashPassword(password);
     
@@ -83,7 +73,14 @@ export async function getFakeData(limit , mode) {
     } else {
         const fakeData = [];
         for (let index = 0; index < limit; index++) {
-            fakeData.push(data)
+            let newData = data;
+            newData = {
+                ...newData,
+                urls: {
+                    regular: randUrl[RandomNumber(0, 5)]
+                }
+            }
+            fakeData.push(newData)
         }
         return fakeData
     }
