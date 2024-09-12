@@ -21,11 +21,17 @@ body {
 }
 
 @layer utilities {
+  .container-style {
+    @apply w-full h-screen thin-scrollbar  px-10 py-10
+  }
   .text-balance {
     text-wrap: balance;
   }
   .transition-300 {
     @apply transition-all duration-300
+  }
+  .text-subheading{
+    @apply text-2xl tracking-widest font-medium
   }
 }
 
