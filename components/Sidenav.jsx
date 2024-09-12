@@ -9,14 +9,15 @@ import clsx from "clsx";
 export default function Sidenav() {
   const path = usePathname();
   const iconSize = 30;
+  const defaultQuery = "?page=1&per_page=12";
   const iconObj = [
     {
-      href: "/",
+      href: `/${defaultQuery}`,
       icon: React.cloneElement(<FaHome />),
       size: 30,
     },
     {
-      href: "/tag",
+      href: `/tag`,
       icon: React.cloneElement(<FaTag />),
       size: 27,
     },
