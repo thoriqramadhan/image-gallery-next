@@ -62,7 +62,7 @@ export default function page() {
           <Link
             className="aspect-[12/9] border rounded-xl flex flex-col justify-center px-5"
             key={category.slug}
-            href={`/tag/${category.slug}`}
+            href={`/tag/${category.slug}?page=1&per_page=12`}
           >
             {React.cloneElement(category.icon, {
               className: "text-5xl mb-1",

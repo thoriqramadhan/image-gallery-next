@@ -9,7 +9,9 @@ export default async function page({ params }) {
   const id = params.id;
   // const related_data = await getImgDetail(id);
   const imgDetail = await getFakeData(0, "object");
+  // const imgDetail = await getImgDetail(id);
   const related_data = await getRelatedImg(relatedImg);
+  // const related_data = await getRelatedImg(imgDetail);
   const { created_at, alt_description, urls, user, related_collection } =
     imgDetail;
   return (

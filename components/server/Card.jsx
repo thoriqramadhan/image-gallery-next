@@ -2,38 +2,43 @@ import Image from "next/image";
 import {
   allBlurredDataUrls,
   FormatDate,
-  getBase64,
-  RandomNumber,
   splitArrayIntoThree,
 } from "@/app/lib/utils";
 import Link from "next/link";
-import { getFakeData } from "@/app/lib/data";
+import { getFakeData, getImg, getPageData } from "@/app/lib/data";
 
-export async function BentoCardWrapper() {
-  const mainData = await allBlurredDataUrls(await getFakeData());
+export async function BentoCardWrapper({ query, topic }) {
+  const { searchQuery = "", page, limit } = query;
+  // const mainData = await allBlurredDataUrls(
+  //   await getPageData(searchQuery, page, limit, topic)
+  // );
+  const mainData = await allBlurredDataUrls(await getFakeData(12));
   const [fakeData1, fakeData2, fakeData3] = await splitArrayIntoThree(mainData);
-  // const fakeData1 = await allBlurredDataUrls(await getFakeData(5));
-  // const fakeData2 = await allBlurredDataUrls(await getFakeData(5));
-  // const fakeData3 = await allBlurredDataUrls(await getFakeData(5));
   return (
     <>
-      <div className="w-full h-screen grid gap-2 grid-cols-1 md:grid-cols-2 lg:grid-cols-3">
-        <div className="flex-1 flex flex-col gap-y-3">
-          {fakeData1.map((item) => (
-            <BentoCardItem object={item} key={item.id} />
-          ))}
+      {mainData.length === 0 ? (
+        <div className="w-full h-screen flex justify-center items-center">
+          <p>Data {searchQuery || "you search"} not found...</p>
         </div>
-        <div className="flex-1 flex flex-col gap-y-3">
-          {fakeData2.map((item) => (
-            <BentoCardItem object={item} key={item.id} />
-          ))}
+      ) : (
+        <div className="w-full h-screen grid gap-2 grid-cols-1 md:grid-cols-2 lg:grid-cols-3">
+          <div className="flex-1 flex flex-col gap-y-3">
+            {fakeData1.map((item) => (
+              <BentoCardItem object={item} key={item.id} />
+            ))}
+          </div>
+          <div className="flex-1 flex flex-col gap-y-3">
+            {fakeData2.map((item) => (
+              <BentoCardItem object={item} key={item.id} />
+            ))}
+          </div>
+          <div className="flex-1 flex flex-col gap-y-3">
+            {fakeData3.map((item) => (
+              <BentoCardItem object={item} key={item.id} />
+            ))}
+          </div>
         </div>
-        <div className="flex-1 flex flex-col gap-y-3">
-          {fakeData3.map((item) => (
-            <BentoCardItem object={item} key={item.id} />
-          ))}
-        </div>
-      </div>
+      )}
     </>
   );
 }
@@ -58,12 +63,11 @@ export async function BentoCardItem({ object }) {
 const CardPreview = ({ created_at, user }) => {
   const created = FormatDate(created_at);
   const profile = user.profile_image.large;
-  console.log(profile);
   return (
     <div className="w-full h-full bg-black/45 absolute top-0 opacity-0 transition-300 group-hover:opacity-100">
       <div className="absolute bottom-5 left-5 flex items-center gap-x-3">
         <div className="w-10 h-10 rounded-full overflow-hidden relative">
-          <Image src={profile} fill objectFit="cover" />
+          <Image src={profile} alt={user.id} fill objectFit="cover" />
         </div>
         <p className="text-white">{user.name}</p>
         <p className="text-xs">{created}</p>
@@ -78,7 +82,7 @@ export function TopContributorsCard({ contributors }) {
       <p className="font-bold mb-3">Top Contributors</p>
       <div className="w-full flex-1 gap-y-1 flex flex-col overflow-y-auto thin-scrollbar">
         {contributors.map((contributor) => (
-          <TopContributorsItem user={contributor} />
+          <TopContributorsItem user={contributor} key={contributor.id} />
         ))}
       </div>
     </div>

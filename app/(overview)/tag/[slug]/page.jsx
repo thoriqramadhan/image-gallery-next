@@ -1,3 +1,4 @@
+import { getTopic } from "@/app/lib/data";
 import { topicData, topicPhoto } from "@/app/lib/static_data";
 import { allBlurredDataUrls } from "@/app/lib/utils";
 import {
@@ -7,8 +8,13 @@ import {
 import { BentoWrapperSkeletons } from "@/components/skeleton/skeletons";
 import React, { Suspense } from "react";
 
-export default async function Page() {
-  const { id, slug, title, owners, description, top_contributors } = topicData;
+export default async function Page({ searchParams, params }) {
+  const page = searchParams.page || "";
+  const limit = searchParams.limit || "";
+  // const { slug, title, owners, description, top_contributors } = await getTopic(
+  //   params.slug
+  // );
+  const { slug, title, owners, description, top_contributors } = topicData;
   const contributorsBase64 = await allBlurredDataUrls(top_contributors, 2);
   return (
     <div className="container-style">
@@ -25,7 +31,7 @@ export default async function Page() {
       </div>
       <div className="w-full mt-16">
         <Suspense fallback={<BentoWrapperSkeletons />}>
-          <BentoCardWrapper />
+          <BentoCardWrapper query={{ page, limit }} topic={slug} />
         </Suspense>
       </div>
     </div>
