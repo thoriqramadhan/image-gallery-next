@@ -39,7 +39,7 @@ export async function allBlurredDataUrls(imageArray, path = 1) {
         switch (path) {
                 case 2:
                     paths = ['profile_image', 'large']; // Sesuaikan path dinamis
-                    break;
+                        break;
                 default:
                     paths = ['urls', 'regular']; // Sesuaikan path dinamis
                     break;
@@ -65,6 +65,5 @@ export async function splitArrayIntoThree(arr) {
         const part1 = arr.slice(0, size)
         const part2 = arr.slice(size, size * 2)
         const part3 = arr.slice(size * 2, arr.length)
-        console.log(part1)
         return [part1 , part2 , part3]
 }

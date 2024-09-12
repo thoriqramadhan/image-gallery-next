@@ -13,7 +13,6 @@ export function ImgCard({ imgData }) {
   const date = FormatDate(created_at);
   function handler() {
     setIsFavourite(!isFavourite);
-    console.log(isFavourite);
   }
   return (
     <div className="flex flex-col text-center gap-y-1 group">
