@@ -82,8 +82,6 @@ function RecomendationCard({ data }) {
           src={urls.regular}
           alt="related"
           fill
-          // width={200}
-          // height={250}
         />
         <div className="w-full h-full bg-black/45 z-30 absolute top-0 px-2 opacity-0 transition-300 group-hover:opacity-100">
           <div className="absolute bottom-5 left-4">
