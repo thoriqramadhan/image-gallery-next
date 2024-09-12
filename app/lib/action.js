@@ -3,6 +3,8 @@
 import { z } from 'zod';
 import { hashPassword } from "@/app/lib/auth";
 import { query } from "@/app/lib/db"
+import { createSession } from './session';
+import { redirect } from 'next/navigation';
 
 const isEmailUnique = async (email) => {
     // mengecek di db dengan count total column yang memenuhi kondisi dari from
@@ -33,11 +35,17 @@ export async function createUser(formData) {
 
     let hashedpassword = await hashPassword(password);
     try {
-        await query(`INSERT INTO "user" (username , email , password) VALUES ($1 , $2 , $3);`, 
+        const insertResult = await query(`INSERT INTO "user" (username , email , password) VALUES ($1 , $2 , $3);`, 
             [username, email, hashedpassword]
         )
+        const userId = insertResult.rows[0].id;  // Mengambil ID dari hasil query
+        console.log('User created with ID:', userId);
+
+        // Membuat session untuk user yang baru dibuat
+        await createSession(userId);
     } catch (error) {
         console.log('Databse Error',error)
-        throw new Error('Failed to insert user to database')
+        // throw new Error('Failed to insert user to database')
     }
+    redirect('/profile')
 }
