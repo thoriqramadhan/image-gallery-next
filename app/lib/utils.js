@@ -20,7 +20,7 @@ export async function getBase64(imageUrl) {
         try {
                 const res = await fetch(imageUrl);
                 if (!res.ok) {
-                        throw new Error(`Failed to fetch: ${res.status} ${res.statusText}`)
+                        throw new Error(`Failed to fetch:`)
                 }
                 const buffer = await res.arrayBuffer()
                 const { base64 } = await getPlaiceholder(buffer)
@@ -31,12 +31,40 @@ export async function getBase64(imageUrl) {
         }
 }
 
-export async function allBlurredDataUrls(imageArray) {
-        const base64images = imageArray.map(image => getBase64(image.urls.regular))
-        const base64Results = await Promise.all(base64images);
-        const imageWithBase64 = imageArray.map((image, index) => {
-                image.urls.base64 = base64Results[index];
-                return image;
-        })
-        return imageWithBase64
+function getObjectPath(obj, pathArray) {
+        return pathArray.reduce((acc, key) => acc && acc[key], obj);
+    }
+export async function allBlurredDataUrls(imageArray, path = 1) {
+        let paths;
+        switch (path) {
+                case 2:
+                    paths = ['profile_image', 'large']; // Sesuaikan path dinamis
+                    break;
+                default:
+                    paths = ['urls', 'regular']; // Sesuaikan path dinamis
+                    break;
+            }
+        try {
+                
+                const base64images = imageArray.map(image => getBase64(getObjectPath(image, paths)))
+                const base64Results = await Promise.all(base64images);
+                const imageWithBase64 = imageArray.map((image, index) => {
+                        const targetPath = getObjectPath(image, paths.slice(0, paths.length - 1));
+                        targetPath.base64 = base64Results[index];
+
+                        return image;
+                })
+                return imageWithBase64
+        } catch (error) {
+                console.log(error)
+        }
+}
+
+export async function splitArrayIntoThree(arr) {
+        const size = Math.ceil(arr.length / 3)
+        const part1 = arr.slice(0, size)
+        const part2 = arr.slice(size, size * 2)
+        const part3 = arr.slice(size * 2, arr.length)
+        console.log(part1)
+        return [part1 , part2 , part3]
 }
