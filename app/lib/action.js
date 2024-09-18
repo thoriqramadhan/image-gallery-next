@@ -4,7 +4,7 @@ import { z } from 'zod';
 import { hashPassword } from "@/app/lib/auth";
 import { query } from "@/app/lib/db"
 import { createSession } from './session';
-import { redirect } from 'next/navigation';
+import { redirect } from 'next/navigation'; 
 
 const isEmailUnique = async (email) => {
     // mengecek di db dengan count total column yang memenuhi kondisi dari from
@@ -30,15 +30,20 @@ export async function createUser(formData) {
         email: formData.get('email'),
         password: formData.get('password')
     }
-    const result = await userSchema.parseAsync(user)
-    const { username, email, password } = result;
-
+    // const result = await userSchema.parseAsync(user)
+    // const { username, email, password } = result;
+    const { username, email, password } = user;
+    let userId;
     let hashedpassword = await hashPassword(password);
     try {
-        const insertResult = await query(`INSERT INTO "user" (username , email , password) VALUES ($1 , $2 , $3);`, 
+        const insertResult = await query(`INSERT INTO "user" (username , email , password) VALUES ($1 , $2 , $3) RETURNING id;`, 
             [username, email, hashedpassword]
         )
-        const userId = insertResult.rows[0].id;  // Mengambil ID dari hasil query
+        userId = insertResult.rows[0].id// Mengambil ID dari hasil query
+        if (!userId) {
+            throw new Error('Failed to fetch id')
+        }
+            
         console.log('User created with ID:', userId);
 
         // Membuat session untuk user yang baru dibuat
@@ -47,5 +52,7 @@ export async function createUser(formData) {
         console.log('Databse Error',error)
         // throw new Error('Failed to insert user to database')
     }
-    redirect('/profile')
+    if (userId){
+        redirect('/profile')
+    }
 }

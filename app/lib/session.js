@@ -25,11 +25,15 @@ export async function createSession(userId) {
     const expiresAt = new Date(Date.now() + 7 * 24 * 60 * 60 * 100)
     const session = await encrypt({ userId, expiresAt })
     
-    cookies().set('Session', session, {
+    cookies().set('session', session, {
         httpOnly: true,
         secure: true,
         expires: expiresAt,
         sameSite: 'lax',
         path: '/',
     })
+  console.log(session)
 }
+// export async function deleteSession() {
+//   cookies().delete('session')
+// }

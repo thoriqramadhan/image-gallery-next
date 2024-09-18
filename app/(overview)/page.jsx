@@ -10,7 +10,7 @@ export default async function Home({ searchParams }) {
   const page = searchParams.page || 1;
   const limit = searchParams.per_page || 1;
   return (
-    <div className="w-full h-full bg-white pb-[90px] md:px-10 overflow-y-auto thin-scrollbar">
+    <div className="w-full h-full bg-white pb-[90px] md:px-10 overflow-y-auto thin-scrollbar md:ml-[80px]">
       <div className="w-full py-10">
         <div className="w-full flex justify-between">
           <h1 className="text-xl font-medium tracking-wide mb-10">

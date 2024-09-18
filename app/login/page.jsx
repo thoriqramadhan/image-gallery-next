@@ -8,7 +8,7 @@ export default async function Page() {
   const navigator = { endpoint: "Register", text: "Dont have an account?" };
   return (
     <>
-      <AuthForm navigatorObj={navigator} action={createUser}>
+      <AuthForm navigatorObj={navigator}>
         <h1 className="font-semibold text-2xl">Login to your account.</h1>
         <Input name="Username" placeholder={"Input your username"} />
         <Input name="Email" type="email" placeholder={"Input your email"} />

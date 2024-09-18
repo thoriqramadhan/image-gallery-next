@@ -8,15 +8,15 @@ import { CategoryTag } from "@/components/Tag";
 export default async function page({ params }) {
   const id = params.id;
   // const related_data = await getImgDetail(id);
-  const imgDetail = await getFakeData(0, "object");
-  // const imgDetail = await getImgDetail(id);
-  const related_data = await getRelatedImg(relatedImg);
-  // const related_data = await getRelatedImg(imgDetail);
+  // const imgDetail = await getFakeData(0, "object");
+  const imgDetail = await getImgDetail(id);
+  // const related_data = await getRelatedImg(relatedImg);
+  const related_data = await getRelatedImg(imgDetail);
   const { created_at, alt_description, urls, user, related_collection } =
     imgDetail;
   return (
     <>
-      <div className="w-full h-full bg-black overflow-y-auto overflow-x-hidden pb-40">
+      <div className="w-full h-full bg-black overflow-y-auto overflow-x-hidden pb-40 md:ml-[80px]">
         <div className="w-full h-1/2 relative group cursor-pointer">
           <div className="w-full h-full absolute bg-black/45 z-30 transition-all duration-500 group-hover:opacity-0"></div>
           <Image

@@ -29,7 +29,7 @@ export default function Sidenav() {
     },
   ];
   return (
-    <div className="w-full z-50 flex justify-center pb-5 fixed bottom-0 group md:w-[80px] md:static md:h-full md:pb-0 md:shrink-0">
+    <div className="w-full z-50 flex justify-center pb-5 fixed bottom-0 group md:w-[80px]  md:h-full md:pb-0 md:shrink-0 md:bottom-auto md:left-0">
       <div
         className="w-[85%] h-20 bg-white border shadow-md rounded-[35px] flex justify-evenly items-center transition-300 translate-y-[100px] group-hover:translate-y-0 md:translate-y-0 
        md:rounded-none md:h-full md:flex-col md:items-center md:justify-start md:gap-y-10 md:pt-10 md:w-full"

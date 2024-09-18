@@ -2,6 +2,7 @@ import React from "react";
 import Link from "next/link";
 import PropTypes from "prop-types";
 import Image from "next/image";
+import { deleteSession } from "@/app/lib/session";
 
 export default function AuthForm({ navigatorObj, action, children }) {
   console.log(navigatorObj);

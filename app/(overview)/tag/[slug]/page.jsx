@@ -11,13 +11,13 @@ import React, { Suspense } from "react";
 export default async function Page({ searchParams, params }) {
   const page = searchParams.page || "";
   const limit = searchParams.limit || "";
-  // const { slug, title, owners, description, top_contributors } = await getTopic(
-  //   params.slug
-  // );
-  const { slug, title, owners, description, top_contributors } = topicData;
+  const { slug, title, owners, description, top_contributors } = await getTopic(
+    params.slug
+  );
+  // const { slug, title, owners, description, top_contributors } = topicData;
   const contributorsBase64 = await allBlurredDataUrls(top_contributors, 2);
   return (
-    <div className="container-style">
+    <div className="container-style ">
       <div className="w-full flex gap-x-3">
         <div className="flex-1 pr-10 flex flex-col gap-y-3 justify-center">
           <p className="text-4xl font-semibold">{title}</p>

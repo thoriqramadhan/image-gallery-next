@@ -22,7 +22,7 @@ body {
 
 @layer utilities {
   .container-style {
-    @apply w-full h-screen thin-scrollbar  px-10 py-10
+    @apply w-full h-screen thin-scrollbar  px-10 py-10 md:ml-[80px]
   }
   .text-balance {
     text-wrap: balance;

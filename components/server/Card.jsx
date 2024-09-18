@@ -9,10 +9,10 @@ import { getFakeData, getImg, getPageData } from "@/app/lib/data";
 
 export async function BentoCardWrapper({ query, topic }) {
   const { searchQuery = "", page, limit } = query;
-  // const mainData = await allBlurredDataUrls(
-  //   await getPageData(searchQuery, page, limit, topic)
-  // );
-  const mainData = await allBlurredDataUrls(await getFakeData(12));
+  const mainData = await allBlurredDataUrls(
+    await getPageData(searchQuery, page, limit, topic)
+  );
+  // const mainData = await allBlurredDataUrls(await getFakeData(12));
   const [fakeData1, fakeData2, fakeData3] = await splitArrayIntoThree(mainData);
   return (
     <>

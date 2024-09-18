@@ -15,10 +15,10 @@ export async function addUser({ username, email, password }) {
         throw new Error('Failed to insert user to database')
     }
 }
-export async function getUser() {
+export async function getUser(id) {
     try {
-        const userObject = await query('SELECT * FROM "user"; ')
-        return userObject.rows;
+        const userObject = await query('SELECT * FROM "user" WHERE id = $1;', [id])
+        return userObject.rows[0]
     } catch (error) {
         console.log(error)
         throw new Error('Failed to fetch user')

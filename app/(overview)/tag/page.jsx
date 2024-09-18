@@ -55,7 +55,7 @@ const categories = [
 
 export default function page() {
   return (
-    <div className="w-full h-screen px-10 py-10">
+    <div className="container-style">
       <h1 className="text-subheading">Categories</h1>
       <div className="w-full grid grid-cols-2 gap-3 mt-5 md:grid-cols-3 lg:grid-cols-4">
         {categories.map((category) => (
