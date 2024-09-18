@@ -17,8 +17,12 @@ export async function addUser({ username, email, password }) {
 }
 export async function getUser(id) {
     try {
-        const userObject = await query('SELECT * FROM "user" WHERE id = $1;', [id])
-        return userObject.rows[0]
+        const userObject = (await query('SELECT * FROM "user" WHERE id = $1;', [id])).rows[0]
+        const userDTO = {
+            username: userObject.username,
+            email: userObject.email
+        }
+        return userDTO
     } catch (error) {
         console.log(error)
         throw new Error('Failed to fetch user')

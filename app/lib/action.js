@@ -1,7 +1,7 @@
 'use server'
 
 import { z } from 'zod';
-import { hashPassword } from "@/app/lib/auth";
+import { comparePassword, hashPassword } from "@/app/lib/auth";
 import { query } from "@/app/lib/db"
 import { createSession } from './session';
 import { redirect } from 'next/navigation'; 
@@ -55,4 +55,24 @@ export async function createUser(formData) {
     if (userId){
         redirect('/profile')
     }
+}
+export async function loginUser(formData) {
+    const user = {
+        name: formData.get('username'),
+        email: formData.get('email'),
+        password: formData.get('password')
+    }
+    const { name, email, password } = user;
+    const userDb = (await query('SELECT * FROM "user" WHERE email = $1', [email])).rows[0]
+    if (!userDb) {
+        return;
+    }
+
+    const isPasswordMatch = await comparePassword(password, userDb.password)
+    if (!isPasswordMatch) {
+        console.log('Password didn`t match')
+        return;
+    }
+        await createSession(userDb.id)
+        redirect('/')
 }

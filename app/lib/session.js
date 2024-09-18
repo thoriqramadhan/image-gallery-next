@@ -32,7 +32,6 @@ export async function createSession(userId) {
         sameSite: 'lax',
         path: '/',
     })
-  console.log(session)
 }
 // export async function deleteSession() {
 //   cookies().delete('session')
