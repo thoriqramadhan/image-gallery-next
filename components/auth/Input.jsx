@@ -1,7 +1,13 @@
 import React from "react";
 import PropTypes from "prop-types";
 
-export function Input({ name, type = "text", placeholder, defaultValue }) {
+export function Input({
+  name,
+  type = "text",
+  placeholder,
+  defaultValue,
+  required = true,
+}) {
   const forName = name.toLowerCase();
   return (
     <div className="my-5">
@@ -17,7 +23,7 @@ export function Input({ name, type = "text", placeholder, defaultValue }) {
         id={forName}
         placeholder={placeholder ?? ""}
         defaultValue={defaultValue}
-        required
+        required={required}
         className="block border px-3 py-2 rounded-md w-full font-medium tracking-wider"
       />
     </div>

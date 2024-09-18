@@ -76,3 +76,51 @@ export async function loginUser(formData) {
         await createSession(userDb.id)
         redirect('/')
 }
+export async function updateUser(formData) {
+    const user = {
+        name: formData.get('username'),
+        email: formData.get('email'),
+        password: formData.get('password')
+    }
+    const { name, email, password } = user;
+    const userDb = await getUserByEmail(email)
+    let hashedpassword = await hashPassword(password);
+    let isPasswordMatch = true
+    if (userDb) {
+        isPasswordMatch = await comparePassword(password , userDb.password)
+    }
+    console.log(!isPasswordMatch)
+    const rules = {
+        insert: 'username = $1, email = $2, password = $3',
+        variables: [
+            name , email , hashedpassword
+        ]
+    }
+    
+    if (userDb) {
+        if (email !== userDb.email && !isPasswordMatch) {
+            rules.insert = 'username = $1, email = $2, password = $3';
+            rules.variables = [name, email, hashedpassword];
+        } else if (email !== userDb.email) {
+            rules.insert = 'username = $1, email = $2';
+            rules.variables = [name, email];
+        } else if (!isPasswordMatch) {
+            rules.insert = 'username = $1, password = $2';
+            rules.variables = [name, hashedpassword];
+        }
+    } else {
+        rules.insert = 'username = $1, email = $2, password = $3';
+        rules.variables = [name, email, hashedpassword];
+    }
+    const updateResult = await query(
+        `UPDATE "user" 
+         SET ${rules.insert} 
+         WHERE id = $${rules.variables.length + 1} RETURNING id;`,
+        [...rules.variables, userDb.id]
+    );
+}
+export async function getUserByEmail(email) {
+    const user = (await query('SELECT * FROM "user" WHERE email = $1', [email])).rows[0]
+    if (!user) return;
+    return user
+}
