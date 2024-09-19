@@ -31,10 +31,10 @@ export default function FlashMessage({ flashMessage }) {
   }
   return (
     <div
-      className={`w-screen h-screen bg-black/30 backdrop-blur-lg z-50 fixed top-0 flex items-start justify-center py-10 ${isHidden ? "hidden" : ""
+      className={`w-screen h-screen bg-black/30 backdrop-blur-lg z-50 fixed top-0 flex items-start justify-center py-10  ${isHidden ? "hidden" : ""
         }`} onClick={handleDisplay}
     >
-      <div className={`w-[80%] min-h-[100px] max-h-fit bg-white border-l-8  shrink-0 flex items-center gap-x-5 px-10 ${flashTypeProperty[type]?.color?.border}`}>
+      <div className={`w-[80%] min-h-[100px] max-h-fit bg-white border-l-8  shrink-0 flex items-center gap-x-5 px-10 md:w-[70%] lg:w-[50%] ${flashTypeProperty[type]?.color?.border}`}>
         <div className={`px-3 py-3 text-white rounded-full ${flashTypeProperty[type]?.color?.background}`}>
           {
             flashTypeProperty[type]?.icon
