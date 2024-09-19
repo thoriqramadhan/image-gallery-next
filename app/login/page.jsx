@@ -1,5 +1,5 @@
 import React from "react";
-import { createUser, loginUser } from "../lib/action";
+import { loginUser } from "../lib/action";
 import { Input } from "@/components/auth/Input";
 import AuthForm from "../../components/auth/AuthForm";
 
