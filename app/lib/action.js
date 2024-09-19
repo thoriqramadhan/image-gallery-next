@@ -132,7 +132,7 @@ export async function updateUser(formData) {
 }
 export async function logout() {
     cookies().delete('session')
-    cookies().set('flashMessage' , JSON.stringify({message: 'user logout sucessfully' , type: 'success'}) , {path:'/' })
+    cookies().set('flashMessage' , JSON.stringify({message: 'user logout sucessfully' , type: 'success'}) , {path:'/' , maxAge:10 })
     redirect('/login')
 }
 export async function getUserByEmail(email) {
