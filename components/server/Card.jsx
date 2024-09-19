@@ -70,7 +70,7 @@ const CardPreview = ({ created_at, user }) => {
           <Image src={profile} alt={user.id} fill objectFit="cover" />
         </div>
         <p className="text-white">{user.name}</p>
-        <p className="text-xs">{created}</p>
+        <p className="text-xs text-white">{created}</p>
       </div>
     </div>
   );
