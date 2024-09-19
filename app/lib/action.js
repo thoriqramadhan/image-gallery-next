@@ -1,10 +1,12 @@
 'use server'
 
-import { z } from 'zod';
+import { z, ZodError } from 'zod';
 import { comparePassword, hashPassword } from "@/app/lib/auth";
 import { query } from "@/app/lib/db"
 import { createSession } from './session';
 import { redirect } from 'next/navigation'; 
+import { cookies } from 'next/headers';
+import { revalidatePath } from 'next/cache';
 
 const isEmailUnique = async (email) => {
     // mengecek di db dengan count total column yang memenuhi kondisi dari from
@@ -13,7 +15,7 @@ const isEmailUnique = async (email) => {
     return res.rows[0].count == 0;
 }
 const userSchema = z.object({
-    username: z.string().min(3),
+    username: z.string().min(3 , {message: 'Name must be atleast 3 characters.'}),
     email: z.string().email({ message: 'Format email tidak sesuai' }).refine(
         async (email) => {
             const unique = await isEmailUnique(email)
@@ -21,7 +23,7 @@ const userSchema = z.object({
         },
         {message: 'Email sudah di gunakan'}
     ),
-    password: z.string().min(6)
+    password: z.string().min(6  , { message: 'Password must be atleast 6 characters'})
 })
 
 export async function createUser(formData) {
@@ -30,9 +32,18 @@ export async function createUser(formData) {
         email: formData.get('email'),
         password: formData.get('password')
     }
-    // const result = await userSchema.parseAsync(user)
+    let result;
+    try {
+        result = await userSchema.parseAsync(user)
+    } catch (error) {
+        if (error instanceof ZodError) {
+            return {
+                errors: error.flatten().fieldErrors
+            }
+        }
+    }
+    const { username, email, password } = result;
     // const { username, email, password } = result;
-    const { username, email, password } = user;
     let userId;
     let hashedpassword = await hashPassword(password);
     try {
@@ -74,7 +85,7 @@ export async function loginUser(formData) {
         return;
     }
         await createSession(userDb.id)
-        redirect('/')
+        redirect('/?page=1&per_page=12')
 }
 export async function updateUser(formData) {
     const user = {
@@ -118,6 +129,10 @@ export async function updateUser(formData) {
          WHERE id = $${rules.variables.length + 1} RETURNING id;`,
         [...rules.variables, userDb.id]
     );
+}
+export async function logout() {
+    cookies().delete('session')
+    redirect('/login')
 }
 export async function getUserByEmail(email) {
     const user = (await query('SELECT * FROM "user" WHERE email = $1', [email])).rows[0]

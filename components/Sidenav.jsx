@@ -3,8 +3,10 @@ import Link from "next/link";
 import { usePathname } from "next/navigation";
 import React from "react";
 import { FaHome, FaUser, FaTag } from "react-icons/fa";
+import { CiLogout } from "react-icons/ci";
 import { twMerge } from "tailwind-merge";
 import clsx from "clsx";
+import { logout } from "@/app/lib/action";
 
 export default function Sidenav() {
   const path = usePathname();
@@ -62,6 +64,14 @@ export default function Sidenav() {
             </div>
           </Link>
         ))}
+        <div className="hidden md:flex flex-1  items-end pb-10 justify-center">
+          <button
+            className="transition-300 hover:bg-slate-400/30 px-3 py-3 rounded-full"
+            onClick={() => logout()}
+          >
+            <CiLogout className="text-xl" />
+          </button>
+        </div>
       </div>
     </div>
   );
